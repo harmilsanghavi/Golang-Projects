@@ -6,3 +6,27 @@
     height: 300px; 
     display: none;
 }
+.pagination{
+    background-color: gray;
+    color: white;
+    padding-top: 4px;
+    border-radius: 8px;
+}
+.pageData span{
+    color: black;
+}
+.MainData li{
+    display: inline;
+    border-radius: 16px;
+}
+.pageData a{
+    color: black;
+    border: 2px solid #fff;
+    border-radius: 16px;
+    padding: 0px 12px 0px 12px;
+    text-decoration: none;
+    background-color: #fff
+}
+span{
+    color: red;
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="/logout" method="get">
+        <input type="submit" value="Logout">
+    </form>
+    <table id="myTable" class="display">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Email</th>
+                <th>Number</th>
+                <th>Profile</th>
+                <th>Delete</th>
+                <th>Update</th>
+            </tr>
+        </thead>
+
+        <tbody></tbody>
+    </table>
+</div>
+<script>
+    /* Initialization of datatable */
+    $(document).ready(function () {
+
+        /* Datatable access by using table ID */
+        $('#myTable').DataTable({
+
+            /* Name of the file source 
+            for data retrieval */
+            "ajax": {
+                "url": "/page",
+            },
+            "columns": [
+
+                /* Name of the keys from 
+                data file source */
+                { "data": "id" },
+                { "data": "fname" },
+                { "data": "lname" },
+                { "data": "email" },
+                { "data": "number" },
+                { "data":"profile",
+                    "render":function(data){
+                        return '<img src="/asset'+data+'" width="100px" height="100px">'
+                    }
+                },
+                {
+                    "data":"id",
+                        "render":function(data){
+                            return '<a href="/delete/'+data+'">Delete</a>'
+                        }
+                },
+                {
+                    "data":"id",
+                        "render":function(data){
+                            return '<a href="/'+data+'">Update</a>'
+                        }
+                }
+            ]
+        });
+    });
+</script>
+</body>
+
+</html>

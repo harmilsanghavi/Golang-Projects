@@ -1,8 +1,6 @@
 package auth
 
 import (
-	"fmt"
-
 	"github.com/dgrijalva/jwt-go"
 )
 
@@ -30,14 +28,14 @@ func SetJwt(name, password string) *LoginResponse {
 	signedToken, err := token.SignedString([]byte("secureSecretText"))
 	var loginResponse LoginResponse
 	if err != nil {
-		fmt.Println(err)
+		//fmt.Println(err)
 		signedToken = "0"
 		loginResponse = LoginResponse{
 			Status: "Login Failed",
 			Token:  signedToken,
 		}
 	} else {
-		fmt.Println(signedToken)
+		//fmt.Println(signedToken)
 		loginResponse = LoginResponse{
 			Status: "Login successful!",
 			Token:  signedToken,

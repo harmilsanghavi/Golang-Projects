@@ -14,18 +14,21 @@
 <body>
     <div class="container">
         <h1>Login</h1>
-        <form action="/savelogin" method="post">
+        <form action="/savelogin" method="post" onsubmit="return FormValidation()">
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="text" class="form-control" name="email" id="email1">
+                <label for="" class="form-label">Email address</label>
+                <input type="text" class="form-control" name="email" id="email">
+                <span id="loginEmail"></span>
             </div>
             <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <label for="" class="form-label">Password</label>
                 <input type="text" class="form-control" name="password" id="password">
+                <span id="loginPass"></span>
             </div>
             <input type="submit" value="submit" id="demo">
         </form>
-        <a href="/">Click Here For Register</a>
+        <a href="/null">Click Here For Register</a>
     </div>
+    <script src="../public/js/login.js"></script>
 </body>
 </html>
