@@ -10,4 +10,11 @@ type Todo struct {
 	Todotopic       string `form:"todotopic"`
 	Tododescription string `form:"tododescription"`
 	Stage           string
+	Attachments     []Attechment
+}
+
+type Attechment struct {
+	gorm.Model
+	Files  string
+	TodoID int
 }
