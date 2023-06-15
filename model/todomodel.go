@@ -15,6 +15,7 @@ type Todo struct {
 
 type Attechment struct {
 	gorm.Model
+	ID     int
 	Files  string
 	TodoID int
 }

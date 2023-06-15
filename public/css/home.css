@@ -45,10 +45,9 @@ body{
     transform: scale(1.1);
     transition: .3s;
 } */
-.progress{
+.prog{
     /* background-color: #93e0ec; */
     background-color: #E3F4F4;
-    height: 23rem;
 }
 .hold{
     /* background-color: #fff68f; */
