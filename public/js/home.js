@@ -94,7 +94,6 @@ async function stateChnage(data) {
 
 async function getMoreData(data) {
     let id = data.id
-    let demo = ``
     let value = "single"
     console.log("id :- ", id)
     let alldatasingleId = await fetch(`/getupdateddata?id=${id}`)
@@ -102,11 +101,19 @@ async function getMoreData(data) {
     console.log(res)
     secondpopupdiv = document.getElementById("atcbody")
     let imgSrc = "./asset/images/task.png";
-    if (res[0].Attachments.length > 0) {
+    var imagearray=[]
+    let lengthofimage=res[0].Attachments.length
+    if (lengthofimage > 0) {
         imgSrc = res[0].Attachments[0].Files;
+        for (let i=0; i<lengthofimage; i++) {
+            let url=res[0].Attachments[i].Files
+            var imageshow=`<img src="${url}" width="30%"/>`;
+            imagearray.push(imageshow);
+        }
     }
-    demo += `<div class="card mb-3" style="width: 15rem;" id="${res[0].Id}" onclick="getMoreData(this)">
-    <form action="/addtodo" method="post" enctype="multipart/form-data">
+    let demo = ``
+    demo += `<div class="card mb-3" style="width: 15rem;" id="${res[0].Id}" >
+        <form action="/addtodo" method="post" enctype="multipart/form-data">
         <img src="${imgSrc}" class="card-img-top" alt="..." data-bs-toggle="modal" data-bs-target="#atcModal" >
         <input type="text" name="todo_id" value="${res[0].Id}" hidden>
         <div class="card-body">
@@ -121,7 +128,12 @@ async function getMoreData(data) {
         <input type="text" class="form-control" name="tododescription" id="tododescription" value="${res[0].Tododescription}">
         </div>
         <div class="mb-3">
-        <input type="file" name="upload" class="form-control" id="upload" multiple="multiple" value="${imgSrc}">
+        <label for="" class="form-label">Select:</label>
+        <input type="file" class="form-control" name="upload" multiple="multiple" id="upload">
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">Attachments</label>
+            <p>${imagearray}</p>
         </div>
         <div class="mb-3">
             <select name="stage" id="${res[0].Id}" onchange="stateChnage(this)">

@@ -15,6 +15,7 @@ func Routes() {
 	router.GET("/", controllers.ShowAllList)
 	router.POST("/addtodo", controllers.AddToDo)
 	router.GET("/getupdateddata", controllers.Hold)
+	// router.GET("/taskcomplete", controllers.TaskComplete)
 	// router.GET("/get", controllers.RetriveHasheMany)
 	router.Run(":" + os.Getenv("PORT"))
 }

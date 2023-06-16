@@ -36,3 +36,9 @@ func GetUpdatedData(id int) []model.Todo {
 	initilizer.DB.Where("id=?", id).Preload("Attachments").Find(&Data)
 	return Data
 }
+
+// func DeleteTask(id int) {
+// 	var user model.Todo
+// 	initilizer.DB.Preload("Attachments").First(&user, id)
+// 	initilizer.DB.Delete(&user)
+// }
