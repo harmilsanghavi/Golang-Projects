@@ -1,0 +1,31 @@
+.dept {
+  display: flex;
+  gap: 1.5rem;
+}
+.dept-card {
+  width: 10rem;
+  height: 5rem;
+}
+
+.todo-column {
+  overflow-y: scroll;
+  height: 650px;
+  margin-bottom: 0.5rem;
+}
+
+.todo-column::-webkit-scrollbar {
+  width: 6px;
+}
+
+.todo-column::-webkit-scrollbar-track {
+  background-color: #fff;
+  border-radius: 100px;
+}
+
+.todo-column::-webkit-scrollbar-thumb {
+  background-color: #6341e0;
+}
+
+.facility-section {
+  margin-top: 5rem;
+}
