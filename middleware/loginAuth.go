@@ -57,6 +57,7 @@ func Check() gin.HandlerFunc {
 			fmt.Println(cookie)
 			if err != nil {
 				fmt.Println("err in cookie")
+				// c.Abort()
 				c.Redirect(302, "/login")
 			}
 			c.Next()

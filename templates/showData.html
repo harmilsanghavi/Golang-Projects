@@ -32,49 +32,63 @@
 
         <tbody></tbody>
     </table>
-</div>
-<script>
-    /* Initialization of datatable */
-    $(document).ready(function () {
+    </div>
+    <script>
+        /* Initialization of datatable */
+        $(document).ready(function () {
 
-        /* Datatable access by using table ID */
-        $('#myTable').DataTable({
+            /* Datatable access by using table ID */
+            $('#myTable').DataTable({
+                /* Name of the file source 
+                for data retrieval */
+                "language": {
+                    "info": "Display _PAGE_ to _END_ of _TOTAL_ entries",
+                },
+                "columnDefs": [
+                    {
+                        "targets": [6],
+                        "orderable": false,
+                    },
+                    {
+                        "targets": [7],
+                        "orderable": false,
+                    },
+                ],
+                "ajax": {
+                    "url": "/page",
+                },
+                "lengthMenu": [3, 5, 10],
+                "columns": [
 
-            /* Name of the file source 
-            for data retrieval */
-            "ajax": {
-                "url": "/page",
-            },
-            "columns": [
-
-                /* Name of the keys from 
-                data file source */
-                { "data": "id" },
-                { "data": "fname" },
-                { "data": "lname" },
-                { "data": "email" },
-                { "data": "number" },
-                { "data":"profile",
-                    "render":function(data){
-                        return '<img src="/asset'+data+'" width="100px" height="100px">'
+                    /* Name of the keys from 
+                    data file source */
+                    { "data": "id" },
+                    { "data": "fname" },
+                    { "data": "lname" },
+                    { "data": "email" },
+                    { "data": "number" },
+                    {
+                        "data": "profile",
+                        "render": function (data) {
+                            return '<img src="/asset' + data + '" width="100px" height="100px">'
+                        }
+                    },
+                    {
+                        "data": "id",
+                        "render": function (data) {
+                            return '<a href="/delete/' + data + '">Delete</a>'
+                        }
+                    },
+                    {
+                        "data": "id",
+                        "render": function (data) {
+                            return '<a href="/update/' + data + '">Update</a>'
+                        }
                     }
-                },
-                {
-                    "data":"id",
-                        "render":function(data){
-                            return '<a href="/delete/'+data+'">Delete</a>'
-                        }
-                },
-                {
-                    "data":"id",
-                        "render":function(data){
-                            return '<a href="/'+data+'">Update</a>'
-                        }
-                }
-            ]
+                ]
+            });
         });
-    });
-</script>
+    </script>
 </body>
 
 </html>

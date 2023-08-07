@@ -16,7 +16,12 @@ type PaginationData struct {
 
 // calling login form
 func GetLogin(c *gin.Context) {
-	c.HTML(http.StatusOK, "login.html", nil)
+	_, err := c.Cookie("mycookie")
+	if err != nil {
+		c.HTML(http.StatusOK, "login.html", nil)
+	} else {
+		c.HTML(http.StatusOK, "showData.html", nil)
+	}
 }
 
 // click on login button than it call
@@ -54,12 +59,16 @@ func GetLogin(c *gin.Context) {
 // }
 
 func PageSet(c *gin.Context) {
-
+	//_, err := c.Cookie("mycookie")
+	// if err != nil {
+	// 	c.Redirect(302, "/login")
+	// } else {
 	Store := services.GetAllData()
 
 	c.JSON(200, gin.H{
 		"data": Store,
 	})
+	// }
 }
 func PageDemo(c *gin.Context) {
 	c.HTML(200, "showData.html", nil)
