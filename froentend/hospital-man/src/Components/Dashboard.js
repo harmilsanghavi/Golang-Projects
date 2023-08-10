@@ -86,7 +86,7 @@ export const Dashboard = () => {
     if (expirationTime > currentTime) {
       console.log('Token has expired');
       navigate("/")
-    } 
+    }
 
     let data = await axios.get(`http://localhost:8900/refreshtoken`, {
       headers: { Bearer: token }
@@ -160,7 +160,22 @@ export const Dashboard = () => {
     role === "patient" ? (
       {
         name: 'Cancel Appointment',
-        cell: row => <a href={`/cancel/${row.ID}`}>Cancel</a>,
+        // cell: row => <a href={`/cancel/${row.Id}`}>Cancel</a>,
+        cell: row => {
+          if (row.Day > '2023-08-10') {
+            if (row.Status !== 'complete') {
+              if (row.Status !== 'reject') {
+                return <a href={`/cancel/${row.Id}`}>Cancel</a>
+              } else {
+                return <p>Rejected</p>
+              }
+            } else {
+              return <p>Completed</p>
+            }
+          } else {
+            return <p>Time Expire</p>
+          }
+        },
         ignoreRowClick: true,
       }
     ) : (
@@ -174,11 +189,17 @@ export const Dashboard = () => {
           } else if (row.Status == 'reject') {
             return <p>Rejected</p>
           } else {
-            return (<>
-              <p className='btn btn-sm btn-primary' onClick={() => handleUpdateStatus(row, 'accept')}>Accept</p>
-              &nbsp;&nbsp;
-              <p className='btn btn-sm btn-danger' onClick={() => handleUpdateStatus(row, 'reject')}>Reject</p>
-            </>)
+
+            if (row.Day > '2023-08-10') {
+
+              return (<>
+                <p className='btn btn-sm btn-primary' onClick={() => handleUpdateStatus(row, 'accept')}>Accept</p>
+                &nbsp;&nbsp;
+                <p className='btn btn-sm btn-danger' onClick={() => handleUpdateStatus(row, 'reject')}>Reject</p>
+              </>)
+            } else {
+              return <p>Time Expire</p>
+            }
           }
         },
         ignoreRowClick: true,
@@ -223,7 +244,7 @@ export const Dashboard = () => {
 
   return (
     <div className='container todo-column'>
-      <h1>Dashboard</h1>
+      <h1>Dashboard {role}</h1>
       <div className="search-container">
         <input type="text" placeholder="Search" value={searchQuery} onChange={(e) => handleSearch(e.target.value)} />
       </div>

@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 import { Dashboard } from "./Components/Dashboard";
 import AuthGuard  from "./auth/AuthGuard";
 import AuthForDashboard from "./auth/AuthForDashboard";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   //var key  = true;  
@@ -42,6 +44,19 @@ function App() {
         </Routes>
         <Footer />
       </BrowserRouter>
+
+      <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
     </div>
   );
 }

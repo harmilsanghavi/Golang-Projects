@@ -4,6 +4,7 @@ import { Modal } from "react-bootstrap";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from 'axios'
+import { toast } from "react-toastify";
 // import Spinner from './Spinner'
 
 
@@ -77,6 +78,7 @@ export const Header = ({ handleLogin, handleLogout }) => {
             .catch(error => { console.log(error.data) });
         console.log(data)
         handleClose()
+        toast.success("Register successfully");
         navigate("/")
 
     };
@@ -86,6 +88,7 @@ export const Header = ({ handleLogin, handleLogout }) => {
         handleSubmit(onSubmit)(e); // call the custom submit function instead
     }
     const [formdata, setFormData] = useState({ email: "", password: "" });
+    
 
     const handlechange = (e) => {
         const { name, value } = e.target;
@@ -109,6 +112,7 @@ export const Header = ({ handleLogin, handleLogout }) => {
         if (responese.data.status === false) {
             console.log("false")
             handleShowModalTwo()
+            toast.error("Email or password is incorrect");
             navigate("/")
         } else {
             console.log("true")
@@ -119,6 +123,7 @@ export const Header = ({ handleLogin, handleLogout }) => {
             localStorage.setItem('data', JSON.stringify(responese.data.data));
             handleLogin();
             // setIsLoggedIn(true)
+            toast.success("Login successfully");
             navigate("/dashboard")
         }
     }
@@ -138,6 +143,7 @@ export const Header = ({ handleLogin, handleLogout }) => {
             roleboolen = false
             // setIsLoggedIn(false)
             handleLogout();
+            toast.success("Logout successfully");
             navigate("/")
         }
     }

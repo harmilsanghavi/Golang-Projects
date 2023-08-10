@@ -128,7 +128,7 @@ func GetAppoinmentBookData(id, offset, limit int, Role, column, dir, search stri
 			Select("doctor_details.first_name,doctor_details.department,appoinment_books.day,appoinment_times.time,appoinment_books.status").
 			Joins("inner join appoinment_books on doctor_details.user_id = appoinment_books.doctor_id").
 			Joins("inner join appoinment_times on appoinment_times.id = appoinment_books.apooinment_time").
-			Where("appoinment_books.user_id = ? AND appoinment_books.deleted_at IS NULL AND  (doctor_details.first_name LIKE ? OR doctor_details.department LIKE ? OR appoinment_books.day LIKE ? OR appoinment_times.time LIKE ?)", id, "%"+search+"%", "%"+search+"%", "%"+search+"%", "%"+search+"%").Order("first_name desc").
+			Where("appoinment_books.user_id = ? AND appoinment_books.deleted_at IS NULL AND  (doctor_details.first_name LIKE ? OR doctor_details.department LIKE ? OR appoinment_books.day LIKE ? OR appoinment_times.time LIKE ?)", id, "%"+search+"%", "%"+search+"%", "%"+search+"%", "%"+search+"%").
 			Count(&totalCount)
 
 	} else {
@@ -141,8 +141,6 @@ func GetAppoinmentBookData(id, offset, limit int, Role, column, dir, search stri
 		initializers.DB.Table("appoinment_books").Select("appoinment_books.first_name, appoinment_books.day, appoinment_times.time,appoinment_books.status").
 			Joins("inner join appoinment_times on appoinment_books.apooinment_time=appoinment_times.id").
 			Where("appoinment_books.doctor_id = ? AND appoinment_books.deleted_at IS NULL AND  (doctor_details.first_name LIKE ? OR doctor_details.department LIKE ? OR appoinment_books.day LIKE ? OR appoinment_times.time LIKE ?)", id, "%"+search+"%", "%"+search+"%", "%"+search+"%", "%"+search+"%").
-			Order(column + " " + dir).Offset(offset).
-			Limit(limit).
 			Count(&totalCount)
 	}
 
